@@ -1,26 +1,24 @@
 function isValid(s) {
+
     const stack = [];
-    const map = {
+    
+    const matchingBrackets = {
         '(': ')',
         '{': '}',
         '[': ']'
     };
 
-    for (let i = 0; i < s.length; i++) {
-        const char = s[i];
-
-        if (map[char]) {
+    for (let char of s) {
+       
+        if (matchingBrackets[char]) {
             stack.push(char);
         } else {
-            const topElement = stack.pop();
-            if (map[topElement] !== char) {
+            const lastOpened = stack.pop();
+            if (matchingBrackets[lastOpened] !== char) {
                 return false;
             }
         }
     }
-    
     return stack.length === 0;
 }
-
-module.exports = { isValid };
 
